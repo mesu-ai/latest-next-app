@@ -2,11 +2,16 @@
 
 import React from 'react';
 
-const page = ({slug}) => {
+const page = async ({params}) => {
+
+  const data = await getData(params);
+  // console.log(data)
+
+  // console.log({params})
 
   return (
     <div>
-      {slug}
+     <h1>{data?.title}</h1>
       
     </div>
   );
@@ -14,16 +19,24 @@ const page = ({slug}) => {
 
 export default page;
 
-
-export async function generateStaticParams() {
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json());
-
-
+async function getData(params) {
+  console.log(params.slug)
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.slug}`);
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+//  console.log(res)
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    // throw new Error('Failed to fetch data');
+  }
  
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return res.json();
 }
+ 
+
+
+
 
 
 
