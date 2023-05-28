@@ -4,6 +4,9 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import PrimaryNavbar from '@/components/molecules/PrimaryNavbar'
 
+// import Error from 'next/error'
+// import GlobalError from './global-error'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -15,22 +18,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <nav className="bg-blue-300 py-5">
-          <ul className="flex justify-center gap-10">
-            <Link href="/">
-              <li>Home</li>
-            </Link>
-            <Link href="/blog">
-              <li>Blog</li>
-            </Link>
-            <Link href="/dashboard">
-              <li>DashBoad</li>
-            </Link>
-            <Link href="/contact">
-              <li>Contact</li>
-            </Link>
-          </ul>
-        </nav> */}
+        
         <PrimaryNavbar/>
         <div className="container mx-auto h-screen my-10">{children}</div>
         <footer className="py-10 bg-black text-white text-center">

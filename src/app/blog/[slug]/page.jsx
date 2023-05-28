@@ -1,18 +1,21 @@
 /* eslint-disable prettier/prettier */
 
-import React from 'react';
+import React, { Suspense } from 'react';
+import Error from '../error';
 
 const page = async ({params}) => {
 
   const data = await getData(params);
-  // console.log(data)
+  console.log(data)
 
-  // console.log({params})
+  if(typeof data !== 'object'){
+    throw new Error('error')
+  }
+
 
   return (
     <div>
-     <h1>{data?.title}</h1>
-      
+      <h1>{data?.title}</h1>
     </div>
   );
 };
