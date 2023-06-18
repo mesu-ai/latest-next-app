@@ -2,14 +2,18 @@
 
 import React from 'react'
 
-const AnalyticsLayout = ({children, work, team }) => {
+const AnalyticsLayout = ({ children, work, team }) => {
   // console.log({work,team,children})
-  return 
-  <div className="flex">
-    {children}
-    {work}
-    {team}
-  </div>
+  return (
+    <section>
+      {children}
+
+      <div className="grid grid-cols-2 gap-5">
+        {team}
+        {work}
+      </div>
+    </section>
+  )
 }
 
 export default AnalyticsLayout
