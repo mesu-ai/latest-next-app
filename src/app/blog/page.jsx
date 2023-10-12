@@ -8,12 +8,13 @@ const page = () => {
       blog page
       <ul className='flex gap-10'>
         {[1, 2, 3, 4, 5].map((item, index) => (
-        <Link href={`/blog/${item}`} key={index}>
+        <Link href={`/photo/${item}`} key={index}>
         <li key={index}>{item}</li>
         </Link>
         
       ))}
       </ul>
+      
     </div>
   )
 }
