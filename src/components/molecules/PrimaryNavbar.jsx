@@ -6,7 +6,7 @@ import Navigation from '../atom/Navigation'
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
-  { name: 'Blog', path: '/blog' },
+  { name: 'Blogs', path: '/blogs' },
   { name: 'Marketplace', path: '/marketplace' },
   { name: 'DashBoard', path: '/dashboard' },
   { name: 'Contact', path: '/contact' },

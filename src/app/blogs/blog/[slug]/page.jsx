@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React, { Suspense } from 'react';
-import Error from '../error';
+import Error from '../../error';
 
 const page = async ({params}) => {
 
@@ -15,6 +15,7 @@ const page = async ({params}) => {
 
   return (
     <div>
+      <h1>single blog page</h1>
       <h1>{data?.title}</h1>
     </div>
   );
