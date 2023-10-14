@@ -4,6 +4,8 @@ import React, { Suspense } from 'react';
 import Error from '../../error';
 
 
+
+
 const page = async ({params}) => {
 
   const data = await getData(params);
