@@ -1,11 +1,12 @@
-import React, { Children } from 'react';
+/* eslint-disable prettier/prettier */
 
-const BlogLayout = ({children, modal}) => {
+import React from 'react';
+
+const BlogLayout = ({ children, modal }) => {
   return (
     <div>
       {modal}
       {children}
-      
     </div>
   );
 };
