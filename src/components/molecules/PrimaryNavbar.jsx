@@ -10,6 +10,7 @@ const headerRoutes = [
   { name: 'Marketplace', path: '/marketplace' },
   { name: 'DashBoard', path: '/dashboard' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Topics', path: '/topics' },
 ]
 
 const PrimaryNavbar = () => {
