@@ -22,23 +22,29 @@ const getTopics = async () => {
 
 export default async function TopicsList() {
   const [state, setState] = useState([]);
+ 
+  const topicsList = await getTopics();
+  // console.log(topicsList?.topics);
 
-  const topics = await getTopics();
 
-  console.log(topics,topics?.length);
+
+  // console.log(topics,topics?.length);
 
 
   const handleBlur = (e) => {
     console.log(e.target.value)
     const { name, value } = e.target;
+    console.log({ name, value });
     const newValue = { ...state };
     newValue[name] = value;
     setState(newValue)
   }
 
+  console.log({ state });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log({state});
 
     try {
       const res = await fetch("http://localhost:3000/api/topics", {
@@ -64,27 +70,19 @@ export default async function TopicsList() {
   return (
     <>
 
-      {topics?.length > 0 && topics?.map((t) => (
-        <div
-          key={t._id}
+      {topicsList?.topics?.map((t,index) => 
+        <ul
+          key={index}
           className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
         >
-          <div>
+          <li>
             <h2 className="font-bold text-2xl">{t.title}</h2>
-            <div>{t.description}</div>
-          </div>
+            <p>{t.description}</p>
+          </li>
+        </ul>
+      )}
 
-          <div className="flex gap-2">
-            <RemoveBtn id={t._id} />
-            <Link href={`/editTopic/${t._id}`}>
-
-              edit
-            </Link>
-          </div>
-        </div>
-      ))}
-
-      {/* <form className='mx-auto max-w-2xl bg-sky-400 flex flex-col px-10 py-12'
+      <form className='mx-auto max-w-2xl bg-sky-400 flex flex-col px-10 py-12'
         onSubmit={(e) => handleSubmit(e)}>
 
         <label htmlFor="title">Title</label>
@@ -95,7 +93,7 @@ export default async function TopicsList() {
 
 
         <button className='bg-green-700 py-2 mt-5 text-white' type="submit">Submit</button>
-      </form> */}
+      </form>
 
 
 

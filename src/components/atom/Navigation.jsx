@@ -10,13 +10,13 @@ const Navigation = ({ navLinks = [] }) => {
 
   return (
     <>
-      {navLinks.map((link) => {
+      {navLinks.map((link,index) => {
         // startsWith math with the home page also
         const isActive = pathname.endsWith(link?.path);
         return (
           <Link
             className={isActive ? 'text-green-700' : 'text-black'}
-            key={link?.name}
+            key={index}
             href={`${link.path}`}
           >
             {link?.name}

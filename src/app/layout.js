@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <PrimaryNavbar />
-        <main className="container mx-auto h-screen my-5 bg-sky-200">{children}</main>
+        <main className="container mx-auto min-h-screen my-5 bg-sky-200">{children}</main>
         <footer className="py-10 bg-black text-white text-center">
           &copy; all right served by Mesu 2023.
         </footer>

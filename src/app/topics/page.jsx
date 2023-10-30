@@ -1,3 +1,5 @@
+'use server'
+
 import TopicsList from '@/components/organization/TopicsList';
 import React from 'react';
 

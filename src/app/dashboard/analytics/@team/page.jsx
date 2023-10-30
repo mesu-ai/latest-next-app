@@ -16,9 +16,9 @@ const page = async() => {
   <Suspense fallback={<Loading />}>
     <div className="space-y-3">
       {teams?.length &&
-        teams?.map((item) => (
+        teams?.map((item,index) => (
           <ul
-            key={item?.id}
+            key={index}
             className="shadow-lg border border-gray-400 rounded-md p-5"
           >
             <li className='text-red-700'>{item?.id}</li>

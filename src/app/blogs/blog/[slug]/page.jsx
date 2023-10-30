@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import Error from '../../error';
 
 
 const page = async ({ params }) => {
 
   const data = await getData(params);
-  console.log(data)
+  // console.log(data)
 
   if (typeof data !== 'object') {
     throw new Error('error')

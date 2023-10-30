@@ -9,7 +9,7 @@ const page = () => {
       <ul className='flex justify-center gap-10 mt-5'>
         {[1, 2, 3, 4, 5].map((item, index) => (
           <Link href={`/blogs/blog/${item}`} key={index}>
-            <li key={index}>{item}</li>
+            <li>{item}</li>
           </Link>
         ))}
       </ul>
