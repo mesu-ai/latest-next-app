@@ -20,7 +20,7 @@ const getTopics = async () => {
 };
 
 export default async function TopicsList() {
-  const [state, setState] = useState({});
+  const [state, setState] = useState([]);
 
   const topics = await getTopics();
 
