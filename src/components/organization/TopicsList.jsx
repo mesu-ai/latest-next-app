@@ -95,8 +95,6 @@ export default async function TopicsList() {
         <button className='bg-green-700 py-2 mt-5 text-white' type="submit">Submit</button>
       </form>
 
-
-
     </>
   );
 }
