@@ -1,11 +1,13 @@
-'use client'
+'use client';
 
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import { FormEvent } from 'react';
 
-const LoginForm = () => {
+export default function UserLogin() {
   const router = useRouter();
+ 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -22,7 +24,6 @@ const LoginForm = () => {
       router.refresh();
     }
   };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -41,6 +42,4 @@ const LoginForm = () => {
       <button type="submit">Login</button>
     </form>
   );
-};
-
-export default LoginForm;
+}
