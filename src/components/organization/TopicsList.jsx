@@ -1,62 +1,30 @@
-"use client";
+// "use client";
 
 import { getTopics, postTopic } from "@/APIs/topics/topics";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
 
 
 export default async function TopicsList() {
-  const [allTopics, setAllTopics] = useState([]);
+  // const [allTopics, setAllTopics] = useState([]);
 
-  
+  const topicsList = await getTopics();
 
+  // useEffect(() => {
+  // const fetchTopics = async() => {
+  //     const topicsList = await getTopics();
+  //     console.log(topicsList?.topics);
+  //     setAllTopics(topicsList?.topics);
+  //   }
 
-  useEffect(() => {
-  const fetchTopics = async() => {
-      const topicsList = await getTopics();
-      console.log(topicsList?.topics);
-      setAllTopics(topicsList?.topics);
-    }
+  // fetchTopics();
 
-  fetchTopics();
+  // }, []);
 
-  }, []);
-
-console.log(allTopics);
+// console.log(allTopics);
 
   // const topicsList = await getTopics();
   // console.log(topicsList?.topics);
 
-  const handleSubmit = async (e) => {
-
-    e.preventDefault();
-
-    console.log('clicked')
-
-
-    try {
-      const formData = new FormData(e.currentTarget);
-      const data={
-        title: formData.get('title'),
-        description: formData.get('description'),
-      }
-    
-
-      const res= await postTopic(data);
-      console.log({ res });
-
-      if (res.ok) {
-        // router.push("/");
-      } else {
-        throw new Error("Failed to create a blog.");
-      }
-      
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
 
   return (
     <>
@@ -72,18 +40,6 @@ console.log(allTopics);
           </li>
         </ul>
       )}
-
-      <form onSubmit={handleSubmit} className='mx-auto max-w-2xl bg-sky-400 flex flex-col px-10 py-12'>
-
-        <label htmlFor="title">Title</label>
-        <input type="text"  name="title" id="title" />
-
-        <label htmlFor="description">Description</label>
-        <textarea name="description" id="description" cols="30" rows="5"></textarea>
-
-
-        <button className='bg-green-700 py-2 mt-5 text-white' type="submit">Submit</button>
-      </form>
 
     </>
   );

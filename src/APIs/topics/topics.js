@@ -15,9 +15,10 @@ export const getTopics = async () => {
 };
 
 
-export const postTopic = async (data) => {  
+export const postTopic = async (data) => { 
+  
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    const res = await fetch("https://super-space-halibut-j9vgjxpvq9r35v9r-3000.app.github.dev/api/topics", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -34,11 +35,3 @@ export const postTopic = async (data) => {
     console.log("Error creating topic: ", error);
   }
 }
-// const res = fetch("http://localhost:3000/api/topics", {
-//   method: "POST",
-//   headers: {
-//     "Content-type": "application/json",
-//   },
-
-//   body: JSON.stringify(data),
-// });
