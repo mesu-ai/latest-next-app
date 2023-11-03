@@ -21,10 +21,9 @@ const TopicsAdd = () => {
       }
       
       const res = await postTopic(data);
-      console.log({ res });
-
-      if (res.ok) {
-        // router.push("/");
+      
+      if (res?.ok) {
+        console.log(' success');
       } else {
         throw new Error("Failed to create a blog.");
       }

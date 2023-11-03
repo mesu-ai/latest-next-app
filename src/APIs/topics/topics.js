@@ -1,7 +1,10 @@
+import {  revalidateTag } from "next/cache";
+
 export const getTopics = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/topics", {
       // cache: "no-store",
+      // next: { tags:['gettopics']}
     });
 
     if (!res.ok) {
@@ -26,11 +29,18 @@ export const postTopic = async (data) => {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) {
+    console.log({res})
+
+    if(res.ok) {
+      console.log("Topic created");
+    }
+
+    else{
       throw new Error("Failed to create topic");
     }
 
     return res.json();
+
   } catch (error) {
     console.log("Error creating topic: ", error);
   }
