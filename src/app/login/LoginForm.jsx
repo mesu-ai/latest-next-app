@@ -17,6 +17,7 @@ const LoginForm = () => {
     });
 
     console.log({ response });
+    
     if (!response?.error) {
       router.push('/');
       router.refresh();

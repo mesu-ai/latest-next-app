@@ -1,8 +1,10 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { JWT } from 'next-auth/jwt';
+import { baseURL } from '@/APIs/config/baseURL';
 
-const baseUrl='https://prod.saralifestyle.com'
+
+// const baseUrl='https://prod.saralifestyle.com'
 // const baseUrl='http://192.168.2.122:90'
 
 export const authOptions= {
@@ -22,7 +24,7 @@ export const authOptions= {
       async authorize(credentials, req) {
         console.log({credentials})
 
-          const res = await fetch(`${baseUrl}/api/Auth/CustomerLogin`, {
+          const res = await fetch(`${baseURL}/api/Auth/CustomerLogin`, {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
