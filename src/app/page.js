@@ -1,37 +1,32 @@
 'use client';
 
-import { signOut, getSession, } from 'next-auth/react';
+import SeeUserDetails from '@/components/organization/SeeUserDetails';
+import { signOut, getSession, useSession, } from 'next-auth/react';
 
-const HomePage = async () => {
 
-  const session = await getSession();
+const HomePage = () => {
 
-  if (session) {
-    console.log({ session });
-  }
 
-  // const seeUserDetails = async () => {
-    
-  //   const res = await fetch('http://localhost:3000/api/auth/user', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${session.accessToken}`,
-  //     },
-  //   });
+  // const session = await getSession();
+  const {data: session, status}= useSession()
 
-  //   const data = await res.json();
-
-  //   console.log({ data });
+  // if (session) {
+  //   console.log({ session });
   // }
+  console.log({ session, status });
 
+  
   return (
     <div className='text-center flex flex-col'>
       <p > Home page</p>
-      {!!session && <button type='button' onClick={() => signOut()}>Sign Out</button>}
 
-      {!!session && <button type='button' onClick={() => seeUserDetails}>See Details</button>}
+      {session?.user?.name ?
+        <div>
+          <button type='button' onClick={() => signOut()}>Sign Out</button>
 
+          <SeeUserDetails />
+
+        </div> : null}
 
     </div>
   );

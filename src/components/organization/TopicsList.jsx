@@ -1,30 +1,11 @@
-// "use client";
 
 import { getTopics, postTopic } from "@/APIs/topics/topics";
 import Link from "next/link";
 
 
 export default async function TopicsList() {
-  // const [allTopics, setAllTopics] = useState([]);
 
   const topicsList = await getTopics();
-
-  // useEffect(() => {
-  // const fetchTopics = async() => {
-  //     const topicsList = await getTopics();
-  //     console.log(topicsList?.topics);
-  //     setAllTopics(topicsList?.topics);
-  //   }
-
-  // fetchTopics();
-
-  // }, []);
-
-// console.log(allTopics);
-
-  // const topicsList = await getTopics();
-  // console.log(topicsList?.topics);
-
 
   return (
     <>
