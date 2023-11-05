@@ -37,7 +37,7 @@ export const authOptions= {
           
 
           if(res.ok && user){
-            console.log({user})
+            // console.log({user})
            
             const newUser={
               // ...user.user,
@@ -58,24 +58,36 @@ export const authOptions= {
   ],
 
   callbacks:{
-    async signIn({ user, account, profile, email, credentials }) {
-      // console.log({user, account, profile, email, credentials})
-      return true;
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   // console.log({user, account, profile, email, credentials})
+    //   return true;
+    // },
+
+    async jwt({token, user, account, profile, isNewUser }) {
+      if (user) {
+       
+
+        // token.id = user.id
+        token = user.accessToken
+        token.refreshToken = user.refreshToken
+        token.accessTokenExpires = user.accessToken.exp
+      }
+
+      console.log({token,user})
+
+      return token;
     },
+
    
-    async redirect({ url, baseUrl }) {
-      return baseUrl
-    },
+    // async redirect({ url, baseUrl }) {
+    //   return baseUrl
+    // },
 
     async session({token, user, session }) {
       return session
     },
 
-    async jwt({token, user, account, profile, isNewUser }) {
-
-      return token;
-    }
-
+   
   }
 
 };

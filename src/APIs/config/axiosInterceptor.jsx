@@ -1,8 +1,14 @@
 
-import { baseURL } from "./baseURL";
+import axios from "axios";
+import { b_token, baseURL } from "./baseURL";
 
-const instance = axios.create({
-  baseURL: baseURL,
+export const api = axios.create({
+  baseURL: `${baseURL}/api`,
   timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
+  headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${b_token}`,
+    },
 });
+
+

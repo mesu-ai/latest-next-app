@@ -1,3 +1,4 @@
+import { api } from '@/APIs/config/axiosInterceptor';
 import React from 'react';
 
 const SeeUserDetails = () => {
@@ -5,14 +6,15 @@ const SeeUserDetails = () => {
   const seeUserDetails = async () => {
     // /api/Customer/Get?customerId=18568
     try {
-      const res = await fetch('/api/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.accessToken}`,
-      },
+      console.log('clicked');
+      const res = await fetch('http://localhost:3000/api/user', {
+        method:'POST',
+        headers: {
+          "Content-type": "application/json",
+        },
+      // const res = await api.get('/Customer/Get', {params: {customerId: 18568},
       body: JSON.stringify({
-        customerId: 18568,
+        customerId: 18568
       }),
     });
 
@@ -21,8 +23,6 @@ const SeeUserDetails = () => {
       console.log({ data });
 
     }
-
-    
       
     } catch (error) {
       console.log(error)
@@ -34,7 +34,7 @@ const SeeUserDetails = () => {
 
   return (
     <div>
-      <button type='button' onClick={() => seeUserDetails}>See Details</button>
+      <button type='button' className='bg-red-500' onClick={() => seeUserDetails()}>See Details</button>
       
     </div>
   );
