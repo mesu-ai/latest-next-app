@@ -44,7 +44,7 @@ export const authOptions= {
               id:user.user.id,
               name:user.user.userName ,
               email:user.user.email,
-              mobileNo:user.user.phoneNumber,
+              phone:user.user.phoneNumber,
               role:user.user.roleId,
               accessToken:user.token
             }
@@ -58,34 +58,34 @@ export const authOptions= {
   ],
 
   callbacks:{
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   // console.log({user, account, profile, email, credentials})
-    //   return true;
-    // },
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log({user, account, profile, email, credentials})
+      return true;
+    },
+
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
 
     async jwt({token, user, account, profile, isNewUser }) {
       if (user) {
        
-
-        // token.id = user.id
-        token = user.accessToken
-        token.refreshToken = user.refreshToken
-        token.accessTokenExpires = user.accessToken.exp
+        
+        token.value = user.accessToken
+        // token.refreshToken = user.refreshToken
+        // token.accessTokenExpires = user.accessToken.exp
       }
-
-      console.log({token,user})
 
       return token;
     },
 
-   
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl
-    // },
 
     async session({token, user, session }) {
+      user = session.user
+      // console.log('session data', {token,user,session})
       return session
     },
+    
 
    
   }
