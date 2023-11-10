@@ -9,7 +9,6 @@ const AuthProvider = ({ children }) => {
   return (
     <SessionProvider>
       {children }
-
     </SessionProvider>
   );
 };

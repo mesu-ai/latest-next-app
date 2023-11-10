@@ -7,14 +7,16 @@ export async function POST(request) {
   // console.log('request',request);
   const data=await request.json();
   const token= await getToken({req: request});
-  console.log(data, token);
+  console.log({data, token});
 
   const response = await fetch(`${baseURL}/api/Customer/Get`, {
     method: 'GET',
     params: {data},
     headers: {
       'Content-Type': 'application/json',
-      'authorization': `Bearer ${b_token}`
+      // 'authorization': `Bearer ${b_token}`
+      'authorization': `Bearer ${token?.value}`
+
     }
   })
 

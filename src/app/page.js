@@ -23,9 +23,7 @@ const HomePage = () => {
       {session?.user?.name ?
         <div>
           <button type='button' onClick={() => signOut()}>Sign Out</button>
-
           <SeeUserDetails />
-
         </div> : null}
 
     </div>
