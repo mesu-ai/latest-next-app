@@ -15,7 +15,7 @@ export async function POST(request) {
     headers: {
       'Content-Type': 'application/json',
       // 'authorization': `Bearer ${b_token}`
-      'authorization': `Bearer ${token?.value}`
+      'authorization': `Bearer ${token?.value}` 
 
     }
   })
