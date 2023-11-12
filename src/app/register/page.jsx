@@ -28,7 +28,7 @@ const Register = () => {
         console.log("Registering the user start");
         console.log(userName, email, password)
 
-        const res = await fetch("https://super-space-halibut-j9vgjxpvq9r35v9r-3000.app.github.dev/api/register", {
+    const res = await fetch("https://super-space-halibut-j9vgjxpvq9r35v9r-3000.app.github.dev/api/register", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
