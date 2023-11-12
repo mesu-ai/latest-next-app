@@ -3,10 +3,12 @@ import User from "@/models/users";
 // const bcrypt = require('bcrypt');
 
 export async function POST(request) {
-  const { userName, email, password: pass } = await request.json();
-  console.log({ userName, email, pass })
-
+  
   try {
+
+    const { userName, email, password: pass } = await request.json();
+    console.log({ userName, email, pass })
+
     await connectMongoDB();
 
     const isExisting = await User.findOne({ email });

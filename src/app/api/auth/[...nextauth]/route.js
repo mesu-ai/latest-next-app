@@ -21,17 +21,19 @@ export const authOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        userName: { label: "email", type: "text" },
+        email: { label: "email", type: "text" },
         password: { label: "password", type: "password" }
 
       },
       async authorize(credentials, req) {
 
-        const { userName, password } = credentials;
+        const { email, password } = credentials;
 
         await connectMongoDB();
 
-        const isExisting = await User.findOne({ email: userName });
+        const isExisting = await User.findOne({ email});
+
+        console.log({ isExisting })
 
         if (!isExisting) {
           throw new Error('User not found');
@@ -44,9 +46,14 @@ export const authOptions = {
 
         } else {
 
+          console.log('user found');
           const { password, ...currentUser } = isExisting._doc;
 
+          console.log({ currentUser })
+
           const accessToken = singJwtToken(currentUser, { expiresIn: '1d' })
+
+          
 
           return { ...currentUser, accessToken };
 
