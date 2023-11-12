@@ -4,8 +4,8 @@ import { JWT } from 'next-auth/jwt';
 import { baseURL } from '@/APIs/config/baseURL';
 import connectMongoDB from '@/libs/mongoDB';
 import User from '@/models/users';
-import bcrypt from 'bcrypt';
 import { singJwtToken } from '@/libs/jwt';
+// const bcrypt = require('bcrypt');
 
 
 // const baseUrl='https://prod.saralifestyle.com'
@@ -37,9 +37,9 @@ export const authOptions = {
           throw new Error('User not found');
         }
 
-        const comparePass = await bcrypt.compare(password, isExisting.password);
+        // const comparePass = await bcrypt.compare(password, isExisting.password);
 
-        if (!comparePass) {
+        if (password !== isExisting.password) {
           throw new Error('Invalid credentials');
 
         } else {

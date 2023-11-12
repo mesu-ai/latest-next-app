@@ -7,7 +7,7 @@ export const api = axios.create({
   timeout: 1000,
   headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${b_token}`,
+      // Authorization: `Bearer ${b_token}`,
     },
 });
 

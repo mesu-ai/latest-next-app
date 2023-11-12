@@ -1,13 +1,13 @@
 import connectMongoDB from "@/libs/mongoDB";
 import User from "@/models/users";
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 export async function POST(request) {
+  const { userName, email, password: pass } = await request.json();
+  console.log({ userName, email, pass })
 
   try {
     await connectMongoDB();
-
-    const { userName, email, password: pass } = await request.json();
 
     const isExisting = await User.findOne({ email });
 
@@ -16,9 +16,9 @@ export async function POST(request) {
       throw new Error('User already exists');
     }
 
-    const hassedPassword = await bycript.hash(pass, 10);
+    // const hassedPassword = await bycript.hash(pass, 10);
 
-    const newUser = await User.create({ userName, email, password: hassedPassword });
+    const newUser = await User.create({ userName, email, password: pass });
 
     const { password, ...user } = newUser._doc;
 
