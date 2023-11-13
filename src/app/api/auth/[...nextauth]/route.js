@@ -1,11 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { JWT } from 'next-auth/jwt';
-import { baseURL } from '@/APIs/config/baseURL';
 import connectMongoDB from '@/libs/mongoDB';
 import User from '@/models/users';
 import { singJwtToken } from '@/libs/jwt';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 // const bcrypt = require('bcrypt');
@@ -32,32 +29,32 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         
-
         const { email, password } = credentials;
 
         await connectMongoDB(myMongoDBUri);
-        const isExisting = await User.findOne({ email});
+        const user = await User.findOne({ email });
 
-        console.log({ isExisting })
+        console.log({ user })
 
-        if (!isExisting) {
+        if (!user) {
           throw new Error('User not found');
         }
 
-        const comparePass = await bcrypt.compare(password, isExisting.password);
-        console.log({ comparePass })
+        const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        if (!comparePass) {
-          throw new Error('Invalid credentials');
-
+        console.log({ isPasswordValid })
+       
+        if (!isPasswordValid) {
+          throw new Error('Incorrect password');
+        
         } else {
 
           // console.log('user found');
-          const { password, ...currentUser } = isExisting._doc;
+          const { password, ...currentUser } = user._doc;
 
-          console.log({ currentUser })
+          console.log({ currentUser });
 
-          const accessToken = singJwtToken(currentUser, { expiresIn: '1d' })
+          const accessToken = singJwtToken(currentUser, { expiresIn: '1d' });
 
 
           // var token = jwt.sign(currentUser, 'cddcf3df385b895f485fbf0572cfa721164105d4dcd5e306598040d39276448a', { expiresIn: '1d' });
@@ -83,6 +80,7 @@ export const authOptions = {
     async jwt({ token, user, account, profile, isNewUser }) {
 
       // console.log({token})
+      
       
       if (user) {
 
