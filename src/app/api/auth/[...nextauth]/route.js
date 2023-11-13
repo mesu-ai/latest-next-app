@@ -6,12 +6,15 @@ import connectMongoDB from '@/libs/mongoDB';
 import User from '@/models/users';
 import { singJwtToken } from '@/libs/jwt';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 // const bcrypt = require('bcrypt');
 
 
 // const baseUrl='https://prod.saralifestyle.com'
 // const baseUrl='http://192.168.2.122:90'
+
+const myMongoDBUri= process.env.MONGODB_URI;
 
 export const authOptions = {
   session: {
@@ -28,10 +31,11 @@ export const authOptions = {
 
       },
       async authorize(credentials, req) {
+        
 
         const { email, password } = credentials;
 
-        await connectMongoDB();
+        await connectMongoDB(myMongoDBUri);
         const isExisting = await User.findOne({ email});
 
         console.log({ isExisting })
@@ -40,9 +44,10 @@ export const authOptions = {
           throw new Error('User not found');
         }
 
-        // const comparePass = await bcrypt.compare(password, isExisting.password);
+        const comparePass = await bcrypt.compare(password, isExisting.password);
+        console.log({ comparePass })
 
-        if (password !== isExisting.password) {
+        if (!comparePass) {
           throw new Error('Invalid credentials');
 
         } else {
@@ -57,7 +62,7 @@ export const authOptions = {
 
           // var token = jwt.sign(currentUser, 'cddcf3df385b895f485fbf0572cfa721164105d4dcd5e306598040d39276448a', { expiresIn: '1d' });
 
-          return {...currentUser, name:'mesu', accessToken};
+          return {...currentUser, accessToken};
 
         }
 

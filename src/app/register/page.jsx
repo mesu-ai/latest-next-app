@@ -8,14 +8,14 @@ import { userRegister } from '@/APIs/users/users'
 
 
 const Register = () => {
-    const [userName, setUsername] = useState("")
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (userName === '' || email === '' || password === '') {
+        if (name === '' || email === '' || password === '') {
             // toast.error("Fill all fields")
             return
         }
@@ -27,10 +27,10 @@ const Register = () => {
 
         try {
             console.log("Registering the user start");
-            console.log(userName, email, password)
+            console.log(name, email, password)
 
             const data = {
-                userName,
+                name,
                 email,
                 password
             }
@@ -65,23 +65,26 @@ const Register = () => {
                 </div>
                 <div className="mt-8">
                     <form onSubmit={handleSubmit}>
+
+                    <div className="flex flex-col mb-6">
+                            <div className="flex">
+                                <input onChange={(e) => setName(e.target.value)} type="text" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your Name" />
+                            </div>
+                        </div>
+
                         <div className="mb-2">
                             <div className="flex">
                                 <input onChange={(e) => setEmail(e.target.value)} type="email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your email" />
                             </div>
                         </div>
-                        <div className="flex flex-col mb-6">
-                            <div className="flex">
-                                <input onChange={(e) => setUsername(e.target.value)} type="text" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your Username" />
-                            </div>
-                        </div>
+                       
                         <div className="flex flex-col mb-6">
                             <div className="flex">
                                 <input onChange={(e) => setPassword(e.target.value)} type="password" id="sign-in-email" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your password" />
                             </div>
                         </div>
                         <div className="flex w-full">
-                            <button className="py-2 px-4  bg-primary hover:bg-blue-700 focus:ring-purple-500 focus:ring-offset-purple-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                            <button className="py-2 px-4  bg-primary hover:bg-blue-700 focus:ring-purple-500 focus:ring-offset-purple-200 hover:text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                 Register
                             </button>
                         </div>
