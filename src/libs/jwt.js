@@ -1,13 +1,13 @@
-import { Jwt } from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 
 export function singJwtToken(payload, options={}){
-  console.log({payload, options});
+  
   const secret= process.env.JWT_SECRET;
-  console.log({secret})
-  const token= Jwt.sign(payload, secret, options);
-  console.log({token})  
-  return token;
+  const token = jwt.sign(payload,secret, options);
+
+  return token
+
 }
 
 
@@ -16,7 +16,7 @@ export function verifyJwtToken(token){
   try {
 
     const secret= process.env.JWT_SECRET;
-    const payload= Jwt.verify(token, secret);
+    const payload= jwt.verify(token, secret);
 
     return payload;
     

@@ -5,6 +5,8 @@ import { baseURL } from '@/APIs/config/baseURL';
 import connectMongoDB from '@/libs/mongoDB';
 import User from '@/models/users';
 import { singJwtToken } from '@/libs/jwt';
+import jwt from 'jsonwebtoken';
+
 // const bcrypt = require('bcrypt');
 
 
@@ -30,7 +32,6 @@ export const authOptions = {
         const { email, password } = credentials;
 
         await connectMongoDB();
-
         const isExisting = await User.findOne({ email});
 
         console.log({ isExisting })
@@ -46,16 +47,17 @@ export const authOptions = {
 
         } else {
 
-          console.log('user found');
+          // console.log('user found');
           const { password, ...currentUser } = isExisting._doc;
 
           console.log({ currentUser })
 
           const accessToken = singJwtToken(currentUser, { expiresIn: '1d' })
 
-          
 
-          return { ...currentUser, accessToken };
+          // var token = jwt.sign(currentUser, 'cddcf3df385b895f485fbf0572cfa721164105d4dcd5e306598040d39276448a', { expiresIn: '1d' });
+
+          return {...currentUser, name:'mesu', accessToken};
 
         }
 
@@ -65,7 +67,7 @@ export const authOptions = {
 
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log({ user, account, profile, email, credentials })
+      // console.log({ user, account, profile, email, credentials })
       return true;
     },
 
@@ -74,10 +76,13 @@ export const authOptions = {
     },
 
     async jwt({ token, user, account, profile, isNewUser }) {
+
+      // console.log({token})
+      
       if (user) {
 
-       console.log({user})
-        token.value = user.accessToken
+      //  console.log({user})
+        token.accessToken = user.accessToken
         // token.refreshToken = user.refreshToken
         // token.accessTokenExpires = user.accessToken.exp
       }
@@ -88,6 +93,7 @@ export const authOptions = {
 
     async session({ token, user, session }) {
       user = session.user
+      user.accessToken = token.accessToken
       // console.log('session data', {token,user,session})
       return session
     },
