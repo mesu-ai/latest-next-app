@@ -10,6 +10,7 @@ const headerRoutes = [
   { name: 'Marketplace', path: '/marketplace' },
   { name: 'DashBoard', path: '/dashboard' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Post', path: '/post' },
   { name: 'Topics', path: '/topics' },
 ]
 
