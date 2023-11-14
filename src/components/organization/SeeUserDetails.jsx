@@ -23,7 +23,7 @@ const SeeUserDetails = () => {
     const token = await accessToken();
     console.log({token})
 
-    const res = await fetch('http://localhost:3000/api/auth/token')
+    // const res = await fetch('http://localhost:3000/api/auth/token')
     // const token= await res.json()
     // console.log({token})
 
