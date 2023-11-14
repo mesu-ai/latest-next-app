@@ -22,8 +22,11 @@ const HomePage = () => {
 
       {session?.user?.name ?
         <div>
-          <button type='button' onClick={() => signOut()}>Sign Out</button>
+          <h2 className='font-bold text-xl capitalize'>Welcome {session.user.name}</h2>
           <SeeUserDetails />
+
+          <button className='my-5 bg-red-500 text-white px-5 rounded-xl py-2' type='button' onClick={() => signOut()}>Sign Out</button>
+          
         </div> : null}
 
     </div>

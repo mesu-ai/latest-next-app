@@ -43,7 +43,7 @@ const SeeUserDetails = () => {
 
   return (
     <div>
-      <button type='button' className='bg-red-500' onClick={() => seeUserDetails()}>See Details</button>
+      <button type='button' className='bg-green-500 p-2 text-white' onClick={() => seeUserDetails()}>See Details</button>
       
     </div>
   );
