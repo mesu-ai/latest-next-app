@@ -1,4 +1,3 @@
-import { api } from "@/APIs/config/axiosInterceptor";
 import { b_token, baseURL } from "@/APIs/config/baseURL";
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
