@@ -1,8 +1,11 @@
+'use client';
+
 /* eslint-disable prettier/prettier */
 import Link from 'next/link'
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import Navigation from '../atom/Navigation'
+import { signOut, useSession } from 'next-auth/react'
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -20,6 +23,11 @@ const authRoutes = [
 ]
 
 const PrimaryNavbar = () => {
+  const { data: session, status } = useSession()
+
+
+  console.log(session)
+
   return (
     <nav className="bg-blue-100 py-5">
       <div className='container xl:px-10 mx-auto'>
@@ -28,7 +36,10 @@ const PrimaryNavbar = () => {
 
         </ul>
         <ul className="flex justify-end gap-10">
-          <Navigation navLinks={authRoutes} />
+          { status === 'authenticated' ?
+            <button onClick={signOut} className='bg-red-500 py-2 px-5 text-white rounded-md'>Logout</button>
+            : <Navigation navLinks={authRoutes} /> }
+
         </ul>
 
       </div>
