@@ -34,16 +34,13 @@ export const authOptions = {
         await connectMongoDB(myMongoDBUri);
         const user = await User.findOne({ email });
 
-        console.log({ user })
-
+        
         if (!user) {
           throw new Error('User not found');
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
-        console.log({ isPasswordValid })
-       
         if (!isPasswordValid) {
           throw new Error('Incorrect password');
         
@@ -51,8 +48,6 @@ export const authOptions = {
 
           // console.log('user found');
           const { password, ...currentUser } = user._doc;
-
-          console.log({ currentUser });
 
           const accessToken = singJwtToken(currentUser, { expiresIn: '1d' });
 
@@ -79,13 +74,13 @@ export const authOptions = {
 
     async jwt({ token, user, account, profile, isNewUser }) {
 
-      // console.log({token})
-      
-      
       if (user) {
 
-      //  console.log({user})
-        token.accessToken = user.accessToken
+      //  console.log( 'jwt data',{user}, {token})
+        
+        token.id=user._id
+        token.accessToken = user.accessToken;
+        
         // token.refreshToken = user.refreshToken
         // token.accessTokenExpires = user.accessToken.exp
       }
@@ -97,6 +92,7 @@ export const authOptions = {
     async session({ token, user, session }) {
       user = session.user
       user.accessToken = token.accessToken
+      // user.id = token.id
       // console.log('session data', {token,user,session})
       return session
     },
