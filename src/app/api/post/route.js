@@ -9,13 +9,17 @@ const myMongoDBUri = process.env.MONGODB_URI;
 
 export async function POST(request) {
 
-  const bearerToken = request.headers.get('authorization').split(' ')[1];
+  const authorizationHeader = request.headers.get('authorization');
+  if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
+    return NextResponse.json({ ok: false, message: "Unauthorized", status: 401 });
+  }
+  const bearerToken = authorizationHeader.split(' ')[1];
   console.log({ bearerToken });
 
   const authorized = verifyJwtToken(bearerToken)
   console.log({ authorized });
 
-  if (bearerToken === undefined || !authorized || !bearerToken) {
+  if (bearerToken === undefined || !authorized) {
     return NextResponse.json({ ok: false, message: "Unauthorized", status: 401 })
 
   }
@@ -38,7 +42,15 @@ export async function POST(request) {
   } catch (error) {
 
     console.log({ error });
-    return NextResponse.json({ ok: false, message: "Something went wrong", status: 500 })
+
+    if (error instanceof ValidationError) {
+      return NextResponse.json({ ok: false, message: "Validation error", status: 400 });
+    } else if (error instanceof SomeOtherError) {
+      return NextResponse.json({ ok: false, message: "Some other specific error", status: 500 });
+    } else {
+      return NextResponse.json({ ok: false, message: "Something went wrong", status: 500 });
+    }
+  
 
   }
 }

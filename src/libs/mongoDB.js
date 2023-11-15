@@ -13,6 +13,7 @@ const connectMongoDB = async (uri) => {
 
   } catch (error) {
     console.log('Error connecting MongoDB', error);
+    return NextResponse.json({ ok: false, message: "Failed to connect to MongoDB", status: 500 });
   }
 };
 
