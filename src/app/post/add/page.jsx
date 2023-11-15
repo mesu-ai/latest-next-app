@@ -1,6 +1,7 @@
 'use client'
 
 
+import { baseURL } from '@/APIs/config/baseURL';
 import React from 'react';
 
 const PostAdd = () => {
@@ -25,7 +26,7 @@ const PostAdd = () => {
 
       // const res = await post(data);
 
-      const res = await fetch('http://localhost:3000/api/post', {
+      const res = await fetch(`${baseURL}/api/post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

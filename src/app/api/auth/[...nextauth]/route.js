@@ -5,11 +5,6 @@ import User from '@/models/users';
 import { singJwtToken } from '@/libs/jwt';
 import bcrypt from 'bcrypt';
 
-// const bcrypt = require('bcrypt');
-
-
-// const baseUrl='https://prod.saralifestyle.com'
-// const baseUrl='http://192.168.2.122:90'
 
 const myMongoDBUri= process.env.MONGODB_URI;
 

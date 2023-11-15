@@ -1,8 +1,10 @@
 import {  revalidateTag } from "next/cache";
+import { baseURL } from "../config/baseURL";
 
 export const getTopics = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    // const res = await fetch(`${baseURL}/api/topics`, {
+    const res = await fetch(`http://localhost:3000/api/topics`, {
       // cache: "no-store",
       // next: { tags:['gettopics']}
     });
@@ -21,7 +23,7 @@ export const getTopics = async () => {
 export const postTopic = async (data) => { 
   
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    const res = await fetch(`${baseURL}/api/topics`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
