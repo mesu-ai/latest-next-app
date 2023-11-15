@@ -33,12 +33,16 @@ const PostAdd = () => {
       const res = await fetch(`${baseURL}/api/post`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization':`Bearer ${session?.user?.accessToken}`
         },
         body: JSON.stringify(data),
       });
 
+
+     
       const jsondata = await res.json();
+      console.log({ res, jsondata });
 
       if (jsondata?.ok) {
         // const data = await res.json();
@@ -46,7 +50,7 @@ const PostAdd = () => {
         router.push('/post');
 
       } else {
-        throw new Error("Failed to create a blog.");
+        throw new Error(jsondata?.message);
       }
 
     } catch (error) {

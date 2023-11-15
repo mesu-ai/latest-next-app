@@ -17,12 +17,11 @@ export function verifyJwtToken(token){
   try {
     // const secret= process.env.JWT_SECRET;
     const payload= jwt.verify(token, secret);
-
     return payload;
     
   } catch (error) {
     
-    console.log({error});
+    // console.log({error});
     return null;
     
   }
