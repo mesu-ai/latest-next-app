@@ -73,7 +73,7 @@ export const authOptions = {
 
       //  console.log( 'jwt data',{user}, {token})
         
-        token.id=user._id
+        token.userId=user._id
         token.accessToken = user.accessToken;
         
         // token.refreshToken = user.refreshToken

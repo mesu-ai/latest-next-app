@@ -16,7 +16,7 @@ const postSchema= new mongoose.Schema({
   category: {
     type: String,
     required: true,
-    enum: ['Technology', 'Science', 'Politics', 'Sports', 'Entertainment', 'Others']
+    enum: ['technology', 'science', 'politics', 'sports', 'entertainment', 'others']
   },
 
   authorId: {

@@ -2,18 +2,21 @@
 
 
 import { baseURL } from '@/APIs/config/baseURL';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const PostAdd = () => {
 
-  
+  const { data: session, status } = useSession();
+  const router = useRouter();
  
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    console.log('clicked')
+    
 
 
     try {
@@ -25,6 +28,7 @@ const PostAdd = () => {
       }
 
       // const res = await post(data);
+      // ${baseURL}/api/post
 
       const res = await fetch(`${baseURL}/api/post`, {
         method: 'POST',
@@ -34,8 +38,13 @@ const PostAdd = () => {
         body: JSON.stringify(data),
       });
 
-      if (res?.ok) {
-        console.log(' success');
+      const jsondata = await res.json();
+
+      if (jsondata?.ok) {
+        // const data = await res.json();
+        // console.log({res,data});
+        router.push('/post');
+
       } else {
         throw new Error("Failed to create a blog.");
       }
@@ -70,11 +79,9 @@ const PostAdd = () => {
           <select name='category' id='category' className='py-2'>
             <option value="technology">Tecnology</option>
             <option value="science">Science</option>
-            <option value="health">Health</option>
             <option value="sports">Sports</option>
             <option value="politics">Politics</option>
             <option value="entertainment">Entertainment</option>
-            <option value="business">Business</option>
             <option value="others">Others</option>
           </select>
 
