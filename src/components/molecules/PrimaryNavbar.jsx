@@ -26,7 +26,7 @@ const PrimaryNavbar = () => {
   const { data: session, status } = useSession()
 
 
-  console.log(session)
+  // console.log(session)
 
   return (
     <nav className="bg-blue-100 py-5">
