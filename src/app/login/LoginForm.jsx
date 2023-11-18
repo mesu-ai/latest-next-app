@@ -6,6 +6,8 @@ import React from 'react';
 
 const LoginForm = () => {
   const router = useRouter();
+  console.log({ router });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -13,14 +15,15 @@ const LoginForm = () => {
       mobileNo: formData.get('mobileNo'),
       password: formData.get('password'),
       isGuestLogin:false,
-      redirect: false,
+      // redirect: true,
+      // callbackUrl: '/',
     });
 
     console.log({ response });
     
     if (!response?.error) {
-      router.push('/');
-      router.refresh();
+      // router.push('/');
+      // router.refresh();
     }
   };
 

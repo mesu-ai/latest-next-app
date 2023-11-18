@@ -1,13 +1,23 @@
-'use client'
+'use client';
+
 import React, {useState} from 'react'
 
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation';
+
 
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const router = useRouter()
+    const router= useRouter();
+
+    const searchParams = useSearchParams();
+    const params = searchParams.get('callbackUrl')
+    console.log({ params });
+   
+
+   console.log({router});
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -22,10 +32,11 @@ const Login = () => {
         }
 
         try {
-            const res = await signIn('credentials', { email, password, redirect: false })
+            const res = await signIn('credentials', { email, password, redirect: false})
 
             if (res?.error == null) {
-                router.push("/")
+                // router.push("/")
+                // toast.success("Logged in successfully")
             } else {
                 // toast.error("Error occured while logging")
             }
