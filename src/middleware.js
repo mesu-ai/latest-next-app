@@ -7,8 +7,8 @@ export default withAuth(
   function middleware(req) {
     
     const { pathname } = req.nextUrl
-   console.log(pathname)
-    console.log(req.nextauth.token)
+    console.log(pathname)
+    // console.log(req.nextauth.token)
   },
 
 
@@ -18,15 +18,15 @@ export default withAuth(
       error: '/error',
     },
     
-    callbacks: {
-      // authorized: ({ token }) => token?.role === "admin",
-      url: "/dashboard",
-    },
+    // callbacks: {
+    //   // authorized: ({ token }) => token?.role === "admin",
+    //   // url: "/dashboard",
+    // },
     
   }
 )
 
-export const config = { matcher: ["/post"] }
+export const config = { matcher: ["/post","/dashboard"] }
 
 // export { default } from "next-auth/middleware"
 

@@ -9,14 +9,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    
     const router= useRouter();
-
     const searchParams = useSearchParams();
-    const params = searchParams.get('callbackUrl')
-    console.log({ params });
-   
 
-   console.log({router});
+    const callbackUrl = searchParams.get('callbackUrl')
+    console.log(callbackUrl);
+   
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -32,12 +31,18 @@ const Login = () => {
         }
 
         try {
-            const res = await signIn('credentials', { email, password, redirect: false})
+            const res = await signIn('credentials', { email, password, redirect: true, callbackUrl: callbackUrl || '/'})
 
-            if (res?.error == null) {
-                // router.push("/")
-                // toast.success("Logged in successfully")
-            } else {
+            
+            if(res.ok){
+                // console.log({res})
+                // router.push(callbackUrl);
+                // router.push('/post');
+                router.refresh();
+                
+            }
+
+            else {
                 // toast.error("Error occured while logging")
             }
         } catch (error) {
