@@ -6,11 +6,13 @@ import { singJwtToken } from '@/libs/jwt';
 import bcrypt from 'bcrypt';
 
 
-const myMongoDBUri= process.env.MONGODB_URI;
+const myMongoDBUri = process.env.MONGODB_URI;
 
 export const authOptions = {
   session: {
     strategy: 'jwt',
+    maxAge:  24 * 60 * 60,
+    updateAge:  60 * 60,
   },
   pages: {
     signIn: '/login',
@@ -23,13 +25,13 @@ export const authOptions = {
 
       },
       async authorize(credentials, req) {
-        
+
         const { email, password } = credentials;
 
         await connectMongoDB(myMongoDBUri);
         const user = await User.findOne({ email });
 
-        
+
         if (!user) {
           throw new Error('User not found');
         }
@@ -38,7 +40,7 @@ export const authOptions = {
 
         if (!isPasswordValid) {
           throw new Error('Incorrect password');
-        
+
         } else {
 
           // console.log('user found');
@@ -49,7 +51,7 @@ export const authOptions = {
 
           // var token = jwt.sign(currentUser, 'cddcf3df385b895f485fbf0572cfa721164105d4dcd5e306598040d39276448a', { expiresIn: '1d' });
 
-          return {...currentUser, accessToken};
+          return { ...currentUser, accessToken };
 
         }
 
@@ -65,7 +67,7 @@ export const authOptions = {
 
     async redirect({ url, baseUrl }) {
       console.log({ url, baseUrl });
-      
+
       return Promise.resolve(url)
     },
 
@@ -73,11 +75,11 @@ export const authOptions = {
 
       if (user) {
 
-      //  console.log( 'jwt data',{user}, {token})
-        
-        token.userId=user._id
+        //  console.log( 'jwt data',{user}, {token})
+
+        token.userId = user._id
         token.accessToken = user.accessToken;
-        
+
         // token.refreshToken = user.refreshToken
         // token.accessTokenExpires = user.accessToken.exp
       }
@@ -88,8 +90,8 @@ export const authOptions = {
 
     async session({ token, user, session }) {
       user = session.user
-      user.accessToken = token.accessToken
-      
+      session.accessToken = token.accessToken
+
       // user.id = token.id
       // console.log('session data', {token,user,session})
       return session

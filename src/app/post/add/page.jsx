@@ -34,7 +34,7 @@ const PostAdd = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':`Bearer ${session?.user?.accessToken}`
+          'Authorization':`Bearer ${session?.accessToken}`
         },
         body: JSON.stringify(data),
       });

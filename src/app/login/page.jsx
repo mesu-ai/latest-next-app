@@ -14,7 +14,12 @@ const Login = () => {
     const searchParams = useSearchParams();
 
     const callbackUrl = searchParams.get('callbackUrl')
-    console.log(callbackUrl);
+   
+
+    const redirectUrl = callbackUrl || '/'
+
+    
+console.log({callbackUrl, redirectUrl})
    
 
     const handleSubmit = async (e) => {
@@ -31,7 +36,7 @@ const Login = () => {
         }
 
         try {
-            const res = await signIn('credentials', { email, password, redirect: true, callbackUrl: callbackUrl || '/'})
+            const res = await signIn('credentials', { email, password, redirect: true, callbackUrl: redirectUrl})
 
             
             if(res.ok){
