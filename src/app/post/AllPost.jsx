@@ -31,7 +31,13 @@ const AllPost = async () => {
       <h1>all post page</h1>
       <ul className="space-y-3  ">
         {allPosts && allPosts?.map((post)=>(
-          <li className="bg-white border border-slate-400 shadow-lg p-5" key={post._id}>{post.title}</li>
+          <li className="bg-white border border-slate-400 shadow-lg p-5" key={post._id}>
+            <p>{post.title}</p>
+            <p>{post.description}</p>
+
+            <button className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button>
+            <p>{post?.likes?.length}</p>
+          </li>
         ))}
       </ul>
       
