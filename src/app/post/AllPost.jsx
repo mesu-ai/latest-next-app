@@ -1,5 +1,4 @@
 
-
 import { getServerSession } from "next-auth/next"
 
 import React from 'react';
@@ -25,6 +24,13 @@ const AllPost = async () => {
   const session = await getServerSession(authOptions)
   const allPosts = await getPosts(session?.accessToken);
 
+  
+  const handleLike = async (id)=>{
+   
+    console.log(id);
+
+  }
+
 
   return (
     <div>
@@ -35,7 +41,7 @@ const AllPost = async () => {
             <p>{post.title}</p>
             <p>{post.description}</p>
 
-            <button className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button>
+            <button onClick={()=>handleLike(post._id)} className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button>
             <p>{post?.likes?.length}</p>
           </li>
         ))}
