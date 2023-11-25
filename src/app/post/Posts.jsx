@@ -2,12 +2,14 @@
 
 
 import React from 'react';
-import LikeButton from './LikeButton';
+// import LikeButton from './LikeButton';
 
 import { authOptions } from '../api/auth/[...nextauth]/route';
-import LikeButton from "./LikeButton";
-import Posts from "./Posts";
+// import LikeButton from "./LikeButton";
+// import Posts from "./Posts";
 import AllPost from './AllPost';
+import { getServerSession } from 'next-auth';
+import LikeButton from './LikeButton';
 
 
 const getPosts = async (accessToken) => {
@@ -33,16 +35,24 @@ const Posts = async () => {
 
   console.log({ allPosts })
 
+  const handleLike = (postId) => {
+    console.log(postId);
+  }
+
+
+
   return (
     <div>
       <h1>all post page</h1>
-      <AllPost>
+      <AllPost handleLike={handleLike}>
         <ul className="space-y-3  ">
           {allPosts && allPosts?.map((post) => (
             <li className="bg-white border border-slate-400 shadow-lg p-5" key={post._id}>
               <p>{post.title}</p>
               <p>{post.description}</p>
 
+
+              <button onClick={() => handleLike(postId)} className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button>
 
               {/* <LikeButton postId={post._id} handleLike={handleLike} /> */}
               <p>{post?.likes?.length}</p>

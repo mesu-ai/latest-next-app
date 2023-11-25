@@ -23,22 +23,22 @@ import React from 'react';
 
 // }
 
-const AllPost =  ({children}) => {
+const AllPost =  ({children, handleLike}) => {
 
   // const session = await getServerSession(authOptions)
   // const allPosts = await getPosts(session?.accessToken);
 
   
-  const handleLike = (postId) => {
-    console.log(postId);
-  };
 
 
   return (
     <div>
       <h1>all post page</h1>
+      <button onClick={()=>handleLike(1)}> hello</button>
 
       {children}
+
+
 
       {/* <Posts posts={allPosts} handleLike={handleLike} /> */}
       {/* <ul className="space-y-3  ">
