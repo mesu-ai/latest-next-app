@@ -35,16 +35,16 @@ const Posts = async () => {
 
   console.log({ allPosts })
 
-  const handleLike = (postId) => {
-    console.log(postId);
-  }
+  // const handleLike = (postId) => {
+  //   console.log(postId);
+  // }
 
 
 
   return (
     <div>
       <h1>all post page</h1>
-      <AllPost handleLike={handleLike}>
+      <AllPost >
         <ul className="space-y-3  ">
           {allPosts && allPosts?.map((post) => (
             <li className="bg-white border border-slate-400 shadow-lg p-5" key={post._id}>
@@ -52,9 +52,9 @@ const Posts = async () => {
               <p>{post.description}</p>
 
 
-              <button onClick={() => handleLike(postId)} className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button>
+              {/* <button onClick={() => handleLike(post._id)} className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button> */}
 
-              {/* <LikeButton postId={post._id} handleLike={handleLike} /> */}
+              <LikeButton postId={post._id} />
               <p>{post?.likes?.length}</p>
             </li>
           ))}
