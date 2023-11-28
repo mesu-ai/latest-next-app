@@ -10,8 +10,13 @@ import LikeButton from './LikeButton';
 
 
 
+
 const getPosts = async (accessToken) => {
   console.log({ accessToken });
+
+  if(!accessToken){
+    return [];
+  }
 
   const res = await fetch(`${baseURL}/api/post`, {
     method: 'GET',
@@ -29,7 +34,8 @@ const getPosts = async (accessToken) => {
 const PostsData = () => {
   const { data: session } = useSession();
 
-  const { data: posts, isLoading } = useQuery('posts', async() => getPosts(session?.accessToken))
+  const { data: posts, isLoading } = useQuery('posts', () => getPosts(session?.accessToken),{
+    enabled: !!session?.accessToken })
   console.log({ posts });
 
   // const session = await getServerSession(authOptions)
