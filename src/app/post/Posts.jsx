@@ -1,12 +1,7 @@
 'use server'
 
-
 import React from 'react';
-// import LikeButton from './LikeButton';
-
 import { authOptions } from '../api/auth/[...nextauth]/route';
-// import LikeButton from "./LikeButton";
-// import Posts from "./Posts";
 import AllPost from './AllPost';
 import { getServerSession } from 'next-auth';
 import LikeButton from './LikeButton';
@@ -32,14 +27,7 @@ const Posts = async () => {
   const session = await getServerSession(authOptions)
   const allPosts = await getPosts(session?.accessToken);
 
-  // console.log({ allPosts,session })
-
-  // const handleLike = (postId) => {
-  //   console.log(postId);
-  // }
-
-
-
+ 
   return (
     <div>
       <h1>all post page</h1>
