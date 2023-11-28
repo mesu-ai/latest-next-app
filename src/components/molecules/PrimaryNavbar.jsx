@@ -30,15 +30,20 @@ const PrimaryNavbar = () => {
 
   return (
     <nav className="bg-blue-100 py-5">
-      <div className='container xl:px-10 mx-auto'>
+      <div className='container xl:px-10 mx-auto '>
         <ul className="flex justify-center gap-10">
           <Navigation navLinks={headerRoutes} />
 
         </ul>
-        <ul className="flex justify-end gap-10">
-          { status === 'authenticated' ?
-            <button onClick={signOut} className='bg-red-500 py-2 px-5 text-white rounded-md'>Logout</button>
-            : <Navigation navLinks={authRoutes} /> }
+        <ul className="flex items-start justify-end gap-10 ">
+          {status === 'authenticated' ?
+            <li className='flex flex-col items-center'>
+              <h2 className=' font-bold py-1.5'>Hi !
+                <span className='text-green-800'> {session?.user?.name}</span>
+              </h2>
+              <button onClick={signOut} className='bg-red-500 py-2 px-5 text-white rounded-md'>Logout</button>
+            </li>
+            : <Navigation navLinks={authRoutes} />}
 
         </ul>
 
