@@ -13,7 +13,7 @@ import LikeButton from './LikeButton';
 
 
 const getPosts = async (accessToken) => {
-
+ 
   const res = await fetch('http://localhost:3000/api/post', {
     method: 'GET',
     headers: {
@@ -24,7 +24,6 @@ const getPosts = async (accessToken) => {
 
   const data = await res.json();
   return data.data;
-
 }
 
 

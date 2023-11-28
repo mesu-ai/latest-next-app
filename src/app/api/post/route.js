@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { verifyJwtToken } from "@/libs/jwt";
 
+
 const myMongoDBUri = process.env.MONGODB_URI;
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -83,6 +84,7 @@ export async function POST(request) {
 
     // console.log(token);
     await Post.create({ ...body, authorId: token.userId });
+    
 
     return NextResponse.json({ ok: true, message: "Post Created", status: 200 });
 

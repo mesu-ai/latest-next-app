@@ -2,10 +2,12 @@
 
 import { baseURL } from '@/APIs/config/baseURL';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const LikeButton = ({ postId, isLike }) => {
   const { data: session } = useSession();
+  const router = useRouter();
 
  
 
@@ -21,8 +23,13 @@ const LikeButton = ({ postId, isLike }) => {
       body: JSON.stringify({postId:id}),
     });
 
-    const data = await res.json();
-    console.log(data);
+    const data = await res?.json();
+    if(res?.ok){
+      console.log(data);
+      router.push('/post');
+     
+    }
+   
 
   }
 
