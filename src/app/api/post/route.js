@@ -43,7 +43,7 @@ export async function GET(request){
     // const posts= await Post.find().populate(token?.userId);
     // const posts= await Post.find({authorId: authorized._id});
     const posts= await Post.find();
-    console.log({posts});
+    // console.log({posts});
 
     return NextResponse.json({ok: true, message: "Post Finded", status: 200, data:posts});
     

@@ -33,7 +33,7 @@ const Posts = async () => {
   const session = await getServerSession(authOptions)
   const allPosts = await getPosts(session?.accessToken);
 
-  console.log({ allPosts })
+  // console.log({ allPosts,session })
 
   // const handleLike = (postId) => {
   //   console.log(postId);
@@ -51,10 +51,7 @@ const Posts = async () => {
               <p>{post.title}</p>
               <p>{post.description}</p>
 
-
-              {/* <button onClick={() => handleLike(post._id)} className="my-3 px-4 py-1.5 bg-blue-500 text-white rounded-full ring-2 hover:ring-4 ring-blue-800 ring-inset" type="button">Like</button> */}
-
-              <LikeButton postId={post._id} />
+              <LikeButton postId={post._id} isLike={post?.likes?.includes(session?.user?.userId)} />
               <p>{post?.likes?.length}</p>
             </li>
           ))}

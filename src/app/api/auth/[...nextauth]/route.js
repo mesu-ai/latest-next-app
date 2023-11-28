@@ -77,7 +77,7 @@ export const authOptions = {
 
         //  console.log( 'jwt data',{user}, {token})
 
-        token.userId = user._id
+        token.userId = user._id;
         token.accessToken = user.accessToken;
 
         // token.refreshToken = user.refreshToken
@@ -89,8 +89,9 @@ export const authOptions = {
 
 
     async session({ token, user, session }) {
-      user = session.user
-      session.accessToken = token.accessToken
+      user = session.user;
+      user.userId= token.userId;
+      session.accessToken = token.accessToken;
 
       // user.id = token.id
       // console.log('session data', {token,user,session})
