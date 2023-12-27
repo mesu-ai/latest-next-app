@@ -1671,15 +1671,15 @@ const MarketplacePage = () => {
      <div className='bg-white w-60 h-96 relative'>
         {arr.map((item, index) => 
         
-          <ul key={index} className=''>
+          <ul key={index} className='group'>
             <li onMouseOver={()=>setHoveredCategory(index)}>{item?.categoryName}</li>
 
             <div className={`${hoveredCategory === index ? 'block' : 'hidden'} bg-yellow-500 absolute left-60 top-0 h-full w-60`}>
               {item?.firstChildren.map((firstChild, firstIndex) =>
-                <ul key={firstIndex} className=''>
+                <ul key={firstIndex} className='group'>
                   <li onMouseOver={()=>setHoveredFirstChildren(firstIndex)} >{firstChild?.categoryName}</li>
 
-                  <div className={`${hoveredFirstChildren === firstIndex ? 'block' : 'hidden'} bg-green-600 absolute left-60 top-0 h-full w-60`}>
+                  <div  className={`hidden bg-green-600  absolute left-60 top-0 h-full w-60`}>
                     {firstChild?.secondChildren?.map((secondChild, secondIndex) =>
                       <ul key={secondIndex} className=''>
                         <li>{secondChild?.categoryName}</li>
@@ -1698,7 +1698,23 @@ const MarketplacePage = () => {
         
         )}
 
+<ul className='group'>
+  <li className=' group-hover:bg-red text-red-600'>
+    hello
+  </li>
+  <li className='group'>
+    <div className='group-hover:bg-blue-500'>
+      Some content
+    </div>
+  </li>
+</ul>
+
+
       </div> 
+
+
+
+      
 
 
   );
